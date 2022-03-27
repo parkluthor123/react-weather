@@ -8,7 +8,15 @@ declare module 'styled-components'
             background: string,
             bgDark: string,
             text: string,
-            primary: string
+            primary: string,
+            forecastBoxBg: string,
+            inputText: string,
+            forecastMiniBox: string,
+        },
+        modal:{
+            background: string,
+            text: string,
+            btnColor: string,
         }
     }
 }

@@ -29,7 +29,7 @@ export const NavTop = styled.nav`
 
             h1{
                 font-size: 36px;
-                color: #fff;
+                color: ${props => props.theme.colors.text};
             }
         }
 `;
@@ -48,14 +48,14 @@ export const SwitchTheme = styled.button`
     height: 50px;
     border-style: none;
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 2px solid ${props => props.theme.colors.text};
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 5px;
     cursor: pointer;
         i{
-            color: #fff;
+            color: ${props => props.theme.colors.text};
         }
 `;
 
@@ -80,7 +80,7 @@ export const SearchWrapper = styled.section`
                     width: var(--full);
                     height: 50px;
                     padding: 0 15px;
-                    color: #ccc
+                    color: ${props=>props.theme.colors.inputText};
                 }
         }
 `;
@@ -105,7 +105,7 @@ export const WheatherHubWrapper = styled.section`
                                 span{
                                     display: flex;
                                     font-size: 36px;
-                                    color: #fff;
+                                    color: ${props => props.theme.colors.text};
                                     font-weight: 900;
                                     line-height: 42px;
                                 }
@@ -146,7 +146,7 @@ export const WheatherHubWrapper = styled.section`
                                             font-weight: 900;
                                             font-size: 36px;
                                             line-height: 42px;
-                                            background: linear-gradient(180deg, rgba(196, 196, 196, 0.2) -79.96%, rgba(196, 196, 196, 0.0877044) 6.86%, rgba(196, 196, 196, 0) 78.31%);
+                                            background: ${props=>props.theme.colors.forecastMiniBox};
                                             border-radius: 10px;
                                             border-style: none;
                                             cursor: pointer;
@@ -202,9 +202,7 @@ export const ForecastArea = styled.section`
 export const ForecastBoxWrapper = styled.div`
     width: 172px;
     min-height: 395px;
-    background: linear-gradient(0deg, rgba(196, 196, 196, 0.2) -79.96%, 
-                                      rgba(196, 196, 196, 0.0877044) 6.86%, 
-                                      rgba(196, 196, 196, 0) 78.31%);
+    background: ${props=>props.theme.colors.forecastBoxBg};
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -308,8 +306,8 @@ export const MessageArea = styled.div`
             width: var(--full);
             max-width: 660px;
             min-height: 380px;
-            background-color: ${props=>props.theme.colors.background};
-            border: 2px solid ${props=>props.theme.colors.text};
+            background-color: ${props=>props.theme.modal.background};
+            border: 2px solid ${props=>props.theme.modal.text};
             border-radius: 10px;
             padding: 20px;
             display: flex;
@@ -318,14 +316,14 @@ export const MessageArea = styled.div`
             flex-direction: column;
             gap: 35px;
                 h1{
-                    color: ${props=>props.theme.colors.text};
+                    color: ${props=>props.theme.modal.text};
                     font-size: 36px;
                     text-transform: uppercase;
                     text-align: center;
                 }
 
                 span{
-                    color: ${props=>props.theme.colors.text};
+                    color: ${props=>props.theme.modal.text};
                     text-align: center;
                     display: flex;
                 }
@@ -336,10 +334,11 @@ export const MessageArea = styled.div`
                         button{
                             padding: 15px 20px;
                             border-radius: 10px;
-                            background-color: ${props=>props.theme.colors.primary};
+                            background-color: ${props=>props.theme.modal.btnColor};
                             font-weight: bold;
                             border-style: none;
                             cursor: pointer;
+                            color: ${props=>props.theme.modal.text};
                         }
                 }
         }

@@ -92,7 +92,6 @@ export function DataProvider({children})
                 let arrayHours: string[] = [];
                 let arrayTemperature: string[] = [];
                 
-                console.log(arrNextWeather)
                 arrNextWeather[0].map((el: any)=>{
                     arrayHours.push(moment.unix(el.dt).format('HH:mm')) 
                     arrayTemperature.push(el.main.temp_max) 
