@@ -344,3 +344,20 @@ export const MessageArea = styled.div`
                 }
         }
 `;
+
+export const GraphArea = styled.section`
+    width: var(--full);
+    background-color: ${props=>props.theme.colors.bgDark};
+        .graph-wrapper{
+            width: var(--full);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 640px;
+                .grap-item
+                {
+                    max-width: 952px;
+                    width: var(--full);
+                }
+        }
+`;

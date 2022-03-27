@@ -1,3 +1,4 @@
+import moment from "moment";
 import { useRouter } from "next/router";
 import { useState, 
         useEffect,
@@ -16,6 +17,9 @@ type DataContextType = {
     setFarenheit: ()=> void,
     showModal: (value: boolean)=> void,
     modal: any,
+    hour: any,
+    temperature: any
+
 }
 
 export const DataContext = createContext({} as DataContextType);
@@ -26,10 +30,12 @@ export function DataProvider({children})
 {
     const [theme, setTheme] = useLocalStorage('theme', 'dark');
     const [currentWheather, setCurrentWeather] = useState<object | null>(null);
-    const [nextWheather, setNextWeather] = useState<object | null>(null);
+    const [nextWheather, setNextWeather] = useState<any>(null);
     const [city, setCity] = useState<string>('Amsterdam');
     const [units, setUnits] = useState<string>('metric');
     const [modal, setModal] = useState<boolean>(false);
+    const [hour, setHour] = useState<any>([]);
+    const [temperature, setTemperature] = useState<any>([]);
     const router = useRouter();
 
     const switchTheme = ()=>{
@@ -80,7 +86,20 @@ export function DataProvider({children})
                 {
                     arrNextWeather.push(response.data.list.slice(i, i + 7));
                 }
-                setNextWeather(arrNextWeather)
+                setNextWeather(arrNextWeather);
+
+                // get hours array to grapic
+                let arrayHours: string[] = [];
+                let arrayTemperature: string[] = [];
+                
+                console.log(arrNextWeather)
+                arrNextWeather[0].map((el: any)=>{
+                    arrayHours.push(moment.unix(el.dt).format('HH:mm')) 
+                    arrayTemperature.push(el.main.temp_max) 
+                })
+                setHour(arrayHours)
+                setTemperature(arrayTemperature)
+                //
             }
         })
         .catch((error) => {
@@ -96,6 +115,8 @@ export function DataProvider({children})
     return(
         <DataContext.Provider 
             value={{ 
+                hour,
+                temperature,
                 showModal,
                 modal,
                 nextWheather,

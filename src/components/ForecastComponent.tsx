@@ -9,7 +9,6 @@ import { getDay } from '../utils/Helper'
 
 const ForecastComponent: React.FC = ()=>{
     const { nextWheather } = useContext(DataContext);
-    console.log(nextWheather)
 
     function getMaxOfArray(numArray: any) {
         return Math.max.apply(null, numArray);

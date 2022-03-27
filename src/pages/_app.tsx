@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { dark, light } from '../styles/themes'
 import useLocalStorage from '../custom-hooks/useLocalStorage'
 import Head from 'next/head'
+import Message from '../components/Message'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [storagedTheme, setStoragedTheme] = useLocalStorage('theme', 'dark');
@@ -37,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <NavbarTop />
         <Component {...pageProps} />
+        <Message/>
       </ThemeProvider>
     </DataProvider>
   )

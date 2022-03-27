@@ -3,7 +3,6 @@ import { DataContext } from '../providers/DataProvider'
 import { Container, WheatherHubWrapper } from '../styles/global'
 import Loading from './Loading';
 import CurrentWeather from './CurrentWeather';
-import Message from './Message';
 
 const WheatherHubComponent: React.FC = ()=>{
 
