@@ -4,18 +4,18 @@ import { Container, SearchWrapper } from '../styles/global'
 import { formatToURL } from '../utils/Helper'
 
 const SearchComponent: React.FC = ()=>{
-    const { getCurrentWheather } = useContext(DataContext);
+    const { getCurrentWheather, getCurrentCity } = useContext(DataContext);
     const [city, setCity] = useState<string>('')
 
     const getData = (e: any)=>{
-        setCity(formatToURL(e.target.value));
+        getCurrentCity(formatToURL(e.target.value))
     }
     const captureHandleKey = (e: any)=>{
         const key = e.which || e.keyCode;
         if(key == 13)
         {
             e.preventDefault();
-            getCurrentWheather(city);
+            getCurrentWheather();
         }
     }
     return (

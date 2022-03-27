@@ -5,6 +5,30 @@ export const formatToURL = (text: string)=>{
 
 export const getDay = ()=>{
     const date = new Date();
-    console.log(date)
-    return date;
+    let nameDay;
+
+    switch(date.getDay()){
+        case 0: 
+            nameDay = 'Sunday';
+            break;
+        case 1:
+            nameDay = 'Monday';
+            break;
+        case 2:
+            nameDay = 'Tuesday';
+            break;
+        case 3:
+            nameDay = 'Wednesday';
+            break;
+        case 4:
+            nameDay = 'Thursday';
+            break;
+        case 5:
+            nameDay = 'Friday';
+            break;
+        case 6:
+            nameDay = 'Saturday';
+            break;
+    }
+    return nameDay;
 }

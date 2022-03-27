@@ -8,8 +8,11 @@ import { api } from "../services/api";
 
 type DataContextType = {
     switchTheme: ()=> void,
-    getCurrentWheather: (city: string)=> Promise<void>,
+    getCurrentWheather: ()=> Promise<void>,
     currentWheather: any,
+    getCurrentCity: (city: string)=> void,
+    setCelsius: ()=> void,
+    setFarenheit: ()=> void,
     // getNextWheather: ()=> Promise<void>
 }
 
@@ -24,6 +27,7 @@ export function DataProvider({children})
     const [currentWheather, setCurrentWeather] = useState<object | null>(null);
     const [nextWheather, setNextWeather] = useState<object | null>(null);
     const [city, setCity] = useState<string>('Amsterdam');
+    const [units, setUnits] = useState<string>('metric');
 
     const router = useRouter();
 
@@ -32,12 +36,23 @@ export function DataProvider({children})
         router.reload();
     }
 
-    const getCurrentWheather = async (city: string)=>{
-        await api.get(`/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`)
+    const getCurrentCity = (city: string)=>{
+        setCity(city)
+    }
+
+    const setCelsius = ()=>{
+        setUnits('metric');
+    }
+
+    const setFarenheit = ()=>{
+        setUnits('imperial');
+    }
+
+    const getCurrentWheather = async ()=>{
+        await api.get(`/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
         .then((response)=>{
             if(response.status == 200)
             {
-                console.log(response.data)
                 setCurrentWeather(response.data);
             }
             if(response.status == 401)
@@ -54,19 +69,41 @@ export function DataProvider({children})
             console.clear()
         }) 
     }
-    
+
+    const getNextWheather = async ()=>{
+        await api.get(`/data/2.5/forecast?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
+        .then((response)=>{
+            if(response.status == 200)
+            {
+                console.log(response.data)
+                setNextWeather(response.data);
+            }
+            if(response.status == 401)
+            {
+                setNextWeather({
+                    error: 'There is an error with the API key',
+                })
+            }
+        })
+        .catch((error) => {
+            setNextWeather({
+                error: 'Region not found in the system',
+            })
+            console.clear()
+        }) 
+    }
 
     useEffect(()=>{
-        getCurrentWheather(city);
-    }, [])
-
-    // const getNextWheather = async ()=>{
-        
-    // }
+        getCurrentWheather();
+        getNextWheather();
+    }, [units])
 
     return(
         <DataContext.Provider 
             value={{ 
+                setFarenheit,
+                setCelsius,
+                getCurrentCity,
                 currentWheather, 
                 getCurrentWheather, 
                 switchTheme }}>

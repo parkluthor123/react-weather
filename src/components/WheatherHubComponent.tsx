@@ -6,8 +6,11 @@ import { getDay } from '../utils/Helper';
 
 const WheatherHubComponent: React.FC = ()=>{
 
-    const { currentWheather } = useContext(DataContext);
-    useEffect(()=>{ getDay() },[])
+    const { 
+        currentWheather,
+        setCelsius,
+        setFarenheit
+        } = useContext(DataContext);
 
     return(
         <>
@@ -25,12 +28,12 @@ const WheatherHubComponent: React.FC = ()=>{
                                             <span>{(currentWheather?.main?.temp)?.toFixed(0)}°</span>
                                         </div>
                                         <div className="scales">
-                                            <button type="button">C</button>
-                                            <button type="button">F</button>
+                                            <button type="button" onClick={setCelsius}>C</button>
+                                            <button type="button" onClick={setFarenheit}>F</button>
                                         </div>
                                     </div>
                                     <div className="week-day">
-                                        <p>Thursday, {currentWheather?.weather[0]?.description}</p>
+                                        <p>{getDay()}, {currentWheather?.weather[0]?.description}</p>
                                     </div>
                                 </div>
                             </div>
