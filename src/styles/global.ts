@@ -85,7 +85,7 @@ export const SearchWrapper = styled.section`
         }
 `;
 
-export const WheatherHubWrapper = styled.section`
+export const WeatherHubWrapper = styled.section`
     width: var(--full);
     background-color: ${props=>props.theme.colors.bgDark};
         .weather-scales-area
@@ -232,7 +232,7 @@ export const ForecastBoxWrapper = styled.div`
                 }
         }
 
-        .wheather-balance
+        .weather-balance
         {
             width: var(--full);
             display: flex;

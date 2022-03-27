@@ -32,7 +32,7 @@ import { DataContext } from '../providers/DataProvider';
 
 
 const GraphComponent: React.FC = ()=>{
-    const {nextWheather, hour, temperature} = useContext(DataContext)
+    const {nextWeather, hour, temperature} = useContext(DataContext)
     Chart.defaults.color = "#fff";
     Chart.register(
         ArcElement,

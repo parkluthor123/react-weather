@@ -1,34 +1,34 @@
 import { useContext, useEffect } from 'react'
 import { DataContext } from '../providers/DataProvider'
-import { Container, WheatherHubWrapper } from '../styles/global'
+import { Container, WeatherHubWrapper } from '../styles/global'
 import Loading from './Loading';
 import CurrentWeather from './CurrentWeather';
 
-const WheatherHubComponent: React.FC = ()=>{
+const WeatherHubComponent: React.FC = ()=>{
 
     const { 
-        currentWheather,
+        currentWeather,
         } = useContext(DataContext);
 
         const getCurrentWeather = ()=>{
-            if(!currentWheather)
+            if(!currentWeather)
             {
                 return <Loading/>
             }
             else{
-                return <CurrentWeather Data={currentWheather}/>
+                return <CurrentWeather Data={currentWeather}/>
             }
         }
 
     return(
         <>
-            <WheatherHubWrapper>
+            <WeatherHubWrapper>
                 <Container>
                     { getCurrentWeather() }
                 </Container>
-            </WheatherHubWrapper>
+            </WeatherHubWrapper>
         </>
     )
 }   
 
-export default WheatherHubComponent
+export default WeatherHubComponent

@@ -8,11 +8,11 @@ import { api } from "../services/api";
 
 type DataContextType = {
     switchTheme: ()=> void,
-    getCurrentWheather: ()=> Promise<void>,
-    currentWheather: any,
-    nextWheather: any,
+    getCurrentWeather: ()=> Promise<void>,
+    currentWeather: any,
+    nextWeather: any,
     setCurrentCity: (city: string)=> void,
-    getNextWheather: ()=> void,
+    getnextWeather: ()=> void,
     setCelsius: ()=> void,
     setFarenheit: ()=> void,
     showModal: (value: boolean)=> void,
@@ -29,8 +29,8 @@ export const DataContext = createContext({} as DataContextType);
 export function DataProvider({children})
 {
     const [theme, setTheme] = useLocalStorage('theme', 'dark');
-    const [currentWheather, setCurrentWeather] = useState<object | null>(null);
-    const [nextWheather, setNextWeather] = useState<any>(null);
+    const [currentWeather, setCurrentWeather] = useState<object | null>(null);
+    const [nextWeather, setNextWeather] = useState<any>(null);
     const [city, setCity] = useState<string>('Amsterdam');
     const [units, setUnits] = useState<string>('metric');
     const [modal, setModal] = useState<boolean>(false);
@@ -59,7 +59,7 @@ export function DataProvider({children})
         setUnits('imperial');
     }
 
-    const getCurrentWheather = async ()=>{
+    const getCurrentWeather = async ()=>{
         await api.get(`/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
         .then((response)=>{
             if(response.status == 200)
@@ -74,7 +74,7 @@ export function DataProvider({children})
         }) 
     }
 
-    const getNextWheather = async ()=>{
+    const getnextWeather = async ()=>{
         await api.get(`/data/2.5/forecast?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
         .then((response)=>{
             if(response.status == 200)
@@ -107,8 +107,8 @@ export function DataProvider({children})
     }
 
     useEffect(()=>{
-        getCurrentWheather();
-        getNextWheather();
+        getCurrentWeather();
+        getnextWeather();
     }, [units])
 
     return(
@@ -118,13 +118,13 @@ export function DataProvider({children})
                 temperature,
                 showModal,
                 modal,
-                nextWheather,
+                nextWeather,
                 setFarenheit,
                 setCelsius,
                 setCurrentCity,
-                currentWheather, 
-                getCurrentWheather,
-                getNextWheather, 
+                currentWeather, 
+                getCurrentWeather,
+                getnextWeather, 
                 switchTheme }}>
             {children}
         </DataContext.Provider>

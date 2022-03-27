@@ -4,7 +4,7 @@ import { Container, SearchWrapper } from '../styles/global'
 import { formatToURL } from '../utils/Helper'
 
 const SearchComponent: React.FC = ()=>{
-    const { getCurrentWheather, getNextWheather, setCurrentCity } = useContext(DataContext);
+    const { getCurrentWeather, getnextWeather, setCurrentCity } = useContext(DataContext);
     const getData = (e: any)=>{
         setCurrentCity(formatToURL(e.target.value))
     }
@@ -13,8 +13,8 @@ const SearchComponent: React.FC = ()=>{
         if(key == 13)
         {
             e.preventDefault();
-            getCurrentWheather();
-            getNextWheather();
+            getCurrentWeather();
+            getnextWeather();
         }
     }
     return (

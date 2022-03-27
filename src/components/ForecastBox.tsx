@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react'
 import { ForecastBoxWrapper } from '../styles/global'
 
 interface ForecastLayout {
@@ -20,7 +19,7 @@ const ForecastBox: React.FC<ForecastLayout> = (props: ForecastLayout)=> {
             <div className="status-icons">
               <img className="icon-cloudy" src={`https://openweathermap.org/img/wn/${props.CodeIcon}.png`}/>
             </div>
-            <div className="wheather-balance">
+            <div className="weather-balance">
               <span className="max-degrees">{props.Max}°</span>
               <span className="min-degrees">{props.Min}°</span>
             </div>

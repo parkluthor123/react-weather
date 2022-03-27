@@ -8,7 +8,7 @@ import moment from 'moment'
 import { getDay } from '../utils/Helper'
 
 const ForecastComponent: React.FC = ()=>{
-    const { nextWheather } = useContext(DataContext);
+    const { nextWeather } = useContext(DataContext);
 
     function getMaxOfArray(numArray: any) {
         return Math.max.apply(null, numArray);
@@ -20,9 +20,9 @@ const ForecastComponent: React.FC = ()=>{
 
     const getDaysForecast = ()=>{
         return(
-            !nextWheather ? 
+            !nextWeather ? 
                 <Loading/> :
-                nextWheather?.map((weather: any, index: any)=>{
+                nextWeather?.map((weather: any, index: any)=>{
                     if(index != 0){
                         let maxT = [];
                         let minT = [];
