@@ -228,14 +228,9 @@ export const ForecastBoxWrapper = styled.div`
         {
             width: var(--full);
             margin-top: 15px;
-                i{
-                    color: ${props=>props.theme.colors.text};
-                    font-size: 59px;
+                img{
                     width: 79px;
                     height: 79px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
                 }
         }
 
@@ -294,5 +289,58 @@ export const LoadingSVG = styled.div`
             background-size: cover;
             height: 60px;
             width: 60px;
+        }
+`;
+
+export const MessageArea = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--full);
+    height: 100vh;
+    background-color: rgba(0,0,0,0.2);
+    z-index: 9999;
+    padding: 0 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        .message-wrapper{
+            width: var(--full);
+            max-width: 660px;
+            min-height: 380px;
+            background-color: ${props=>props.theme.colors.background};
+            border: 2px solid ${props=>props.theme.colors.text};
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 35px;
+                h1{
+                    color: ${props=>props.theme.colors.text};
+                    font-size: 36px;
+                    text-transform: uppercase;
+                    text-align: center;
+                }
+
+                span{
+                    color: ${props=>props.theme.colors.text};
+                    text-align: center;
+                    display: flex;
+                }
+                .btn-area{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                        button{
+                            padding: 15px 20px;
+                            border-radius: 10px;
+                            background-color: ${props=>props.theme.colors.primary};
+                            font-weight: bold;
+                            border-style: none;
+                            cursor: pointer;
+                        }
+                }
         }
 `;

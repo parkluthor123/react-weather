@@ -1,13 +1,13 @@
-import * as React from 'react'
+import {useEffect, useState} from 'react'
 import { ForecastBoxWrapper } from '../styles/global'
 
 interface ForecastLayout {
-  Day?: string,
-  Week?: string,
+  DayShort?: string,
+  DayNumber?: number,
   CodeIcon?: string,
-  Max?: string,
-  Min?: string,
-  Description?: string
+  Max?: any,
+  Min?: any,
+  Description?: string | null
 }
 
 const ForecastBox: React.FC<ForecastLayout> = (props: ForecastLayout)=> {
@@ -15,17 +15,17 @@ const ForecastBox: React.FC<ForecastLayout> = (props: ForecastLayout)=> {
     <>
         <ForecastBoxWrapper>
             <div className="day-week">
-              <span>Fri 29</span>
+              <span>{props.DayShort} {props.DayNumber}</span>
             </div>
             <div className="status-icons">
-              <i className="icon-cloudy"></i>
+              <img className="icon-cloudy" src={`https://openweathermap.org/img/wn/${props.CodeIcon}.png`}/>
             </div>
             <div className="wheather-balance">
-              <span className="max-degrees">21°</span>
-              <span className="min-degrees">10°</span>
+              <span className="max-degrees">{props.Max}°</span>
+              <span className="min-degrees">{props.Min}°</span>
             </div>
             <div className="status-description">
-              <p>light rain</p>
+              <p>{props.Description}</p>
             </div>
         </ForecastBoxWrapper>
     </>

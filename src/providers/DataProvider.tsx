@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useState, 
-        useContext,
         useEffect,
         createContext } from "react";
 import useLocalStorage from "../custom-hooks/useLocalStorage";
@@ -10,10 +9,13 @@ type DataContextType = {
     switchTheme: ()=> void,
     getCurrentWheather: ()=> Promise<void>,
     currentWheather: any,
-    getCurrentCity: (city: string)=> void,
+    nextWheather: any,
+    setCurrentCity: (city: string)=> void,
+    getNextWheather: ()=> void,
     setCelsius: ()=> void,
     setFarenheit: ()=> void,
-    // getNextWheather: ()=> Promise<void>
+    showModal: (value: boolean)=> void,
+    modal: any,
 }
 
 export const DataContext = createContext({} as DataContextType);
@@ -23,12 +25,11 @@ export const DataContext = createContext({} as DataContextType);
 export function DataProvider({children})
 {
     const [theme, setTheme] = useLocalStorage('theme', 'dark');
-
     const [currentWheather, setCurrentWeather] = useState<object | null>(null);
     const [nextWheather, setNextWeather] = useState<object | null>(null);
     const [city, setCity] = useState<string>('Amsterdam');
     const [units, setUnits] = useState<string>('metric');
-
+    const [modal, setModal] = useState<boolean>(false);
     const router = useRouter();
 
     const switchTheme = ()=>{
@@ -36,7 +37,11 @@ export function DataProvider({children})
         router.reload();
     }
 
-    const getCurrentCity = (city: string)=>{
+    const showModal = (value: boolean)=>{
+        setModal(value)
+    }
+
+    const setCurrentCity = (city: string)=>{
         setCity(city)
     }
 
@@ -55,18 +60,11 @@ export function DataProvider({children})
             {
                 setCurrentWeather(response.data);
             }
-            if(response.status == 401)
-            {
-                setCurrentWeather({
-                    error: 'There is an error with the API key',
-                })
-            }
         })
         .catch((error) => {
-            setCurrentWeather({
-                error: 'Region not found in the system',
-            })
-            console.clear()
+            if(error instanceof Error) {
+                showModal(true);
+            }
         }) 
     }
 
@@ -75,20 +73,17 @@ export function DataProvider({children})
         .then((response)=>{
             if(response.status == 200)
             {
-                console.log(response.data)
-                setNextWeather(response.data);
-            }
-            if(response.status == 401)
-            {
-                setNextWeather({
-                    error: 'There is an error with the API key',
-                })
+                let i;
+                let arrNextWeather = [];
+
+                for(i = 0; i < response.data.list.length; i+=8)
+                {
+                    arrNextWeather.push(response.data.list.slice(i, i + 8));
+                }
+                setNextWeather(arrNextWeather)
             }
         })
         .catch((error) => {
-            setNextWeather({
-                error: 'Region not found in the system',
-            })
             console.clear()
         }) 
     }
@@ -101,11 +96,15 @@ export function DataProvider({children})
     return(
         <DataContext.Provider 
             value={{ 
+                showModal,
+                modal,
+                nextWheather,
                 setFarenheit,
                 setCelsius,
-                getCurrentCity,
+                setCurrentCity,
                 currentWheather, 
-                getCurrentWheather, 
+                getCurrentWheather,
+                getNextWheather, 
                 switchTheme }}>
             {children}
         </DataContext.Provider>

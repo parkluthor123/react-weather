@@ -3,14 +3,10 @@ export const formatToURL = (text: string)=>{
     return data
 }
 
-export const getDay = ()=>{
-    const date = new Date();
+export const getDay = (day: number, isShort: boolean = false)=>{
     let nameDay;
 
-    switch(date.getDay()){
-        case 0: 
-            nameDay = 'Sunday';
-            break;
+    switch(day){
         case 1:
             nameDay = 'Monday';
             break;
@@ -29,6 +25,16 @@ export const getDay = ()=>{
         case 6:
             nameDay = 'Saturday';
             break;
+        case 7: 
+            nameDay = 'Sunday';
+            break;
     }
-    return nameDay;
+
+    if(!isShort)
+    {
+        return nameDay;   
+    }
+    else{
+        return nameDay?.substring(0, 3);
+    }
 }
