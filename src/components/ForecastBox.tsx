@@ -1,7 +1,16 @@
 import * as React from 'react'
 import { ForecastBoxWrapper } from '../styles/global'
 
-const ForecastBox: React.FC = ()=> {
+interface ForecastLayout {
+  Day?: string,
+  Week?: string,
+  CodeIcon?: string,
+  Max?: string,
+  Min?: string,
+  Description?: string
+}
+
+const ForecastBox: React.FC<ForecastLayout> = (props: ForecastLayout)=> {
   return (
     <>
         <ForecastBoxWrapper>

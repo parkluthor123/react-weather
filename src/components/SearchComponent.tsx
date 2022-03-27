@@ -1,13 +1,36 @@
-import * as react from 'react'
+import {useContext, useState} from 'react'
+import { DataContext } from '../providers/DataProvider'
 import { Container, SearchWrapper } from '../styles/global'
+import { formatToURL } from '../utils/Helper'
+
 const SearchComponent: React.FC = ()=>{
+    const { getCurrentWheather } = useContext(DataContext);
+    const [city, setCity] = useState<string>('')
+
+    const getData = (e: any)=>{
+        setCity(formatToURL(e.target.value));
+    }
+    const captureHandleKey = (e: any)=>{
+        const key = e.which || e.keyCode;
+        if(key == 13)
+        {
+            e.preventDefault();
+            getCurrentWheather(city);
+        }
+    }
     return (
         <> 
             <SearchWrapper>
                 <Container>
                     <form>
                         <label htmlFor="city">City Name</label>
-                        <input type="text" name="city" id="city"/>
+                        <input 
+                            type="text"
+                            name="city"
+                            id="city"
+                            onChange={getData}
+                            onKeyPress={captureHandleKey}
+                        />
                     </form>
                 </Container>
             </SearchWrapper>
