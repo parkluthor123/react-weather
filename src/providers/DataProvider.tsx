@@ -76,9 +76,9 @@ export function DataProvider({children})
                 let i;
                 let arrNextWeather = [];
 
-                for(i = 0; i < response.data.list.length; i+=8)
+                for(i = 0; i < response.data.list.length; i+=7)
                 {
-                    arrNextWeather.push(response.data.list.slice(i, i + 8));
+                    arrNextWeather.push(response.data.list.slice(i, i + 7));
                 }
                 setNextWeather(arrNextWeather)
             }

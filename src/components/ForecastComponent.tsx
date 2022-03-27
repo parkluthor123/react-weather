@@ -9,23 +9,44 @@ import { getDay } from '../utils/Helper'
 
 const ForecastComponent: React.FC = ()=>{
     const { nextWheather } = useContext(DataContext);
-    // console.log(nextWheather)
+    console.log(nextWheather)
+
+    function getMaxOfArray(numArray: any) {
+        return Math.max.apply(null, numArray);
+    }
+
+    function getMinOfArray(numArray: any) {
+        return Math.min.apply(null, numArray);
+    }
+
     const getDaysForecast = ()=>{
         return(
             !nextWheather ? 
                 <Loading/> :
-                nextWheather?.map((weather: any, index: any)=>(
-                    <React.Fragment key={index}>
-                        <ForecastBox 
-                            DayShort={getDay(moment.unix(weather[0]?.dt).isoWeekday(), true)}
-                            DayNumber={moment.unix(weather[0].dt).date()}
-                            Max={Math.trunc(weather[0]?.main.temp_max)}
-                            Min={Math.trunc(weather[7]?.main.temp_min)}
-                            Description={weather[0]?.weather[0].description}
-                            CodeIcon={weather[0]?.weather[0].icon}
-                        />
-                    </React.Fragment>
-                ))
+                nextWheather?.map((weather: any, index: any)=>{
+                    if(index != 0){
+                        let maxT = [];
+                        let minT = [];
+                        for(let i = 0; i < weather.length; i++)
+                        {
+                            maxT.push(weather[i].main.temp_max);
+                            minT.push(weather[i].main.temp_min);
+                        }
+
+                        return(
+                            <React.Fragment key={index}>
+                                <ForecastBox 
+                                    DayShort={getDay(moment.unix(weather[0]?.dt).isoWeekday(), true)}
+                                    DayNumber={moment.unix(weather[0].dt).date()}
+                                    Max={Math.trunc(getMaxOfArray(maxT))}
+                                    Min={Math.trunc(getMinOfArray(minT))}
+                                    Description={weather[0]?.weather[0].description}
+                                    CodeIcon={weather[0]?.weather[0].icon}
+                                />
+                            </React.Fragment>
+                        )
+                    }
+                })
         )
     }
 
