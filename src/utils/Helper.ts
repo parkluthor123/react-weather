@@ -38,3 +38,7 @@ export const getDay = (day: number, isShort: boolean = false)=>{
         return nameDay?.substring(0, 3);
     }
 }
+
+export const BASE_URL = "https://api.openweathermap.org/";
+
+export const API_KEY = "98afe028dd153b1461df183a16681102";

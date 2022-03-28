@@ -5,6 +5,7 @@ import { useState,
         createContext } from "react";
 import useLocalStorage from "../custom-hooks/useLocalStorage";
 import { api } from "../services/api";
+import { API_KEY } from "../utils/Helper";
 
 type DataContextType = {
     switchTheme: ()=> void,
@@ -60,7 +61,7 @@ export function DataProvider({children})
     }
 
     const getCurrentWeather = async ()=>{
-        await api.get(`/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
+        await api.get(`/data/2.5/weather?q=${city}&appid=${API_KEY}&units=${units}`)
         .then((response)=>{
             if(response.status == 200)
             {
@@ -75,7 +76,7 @@ export function DataProvider({children})
     }
 
     const getnextWeather = async ()=>{
-        await api.get(`/data/2.5/forecast?q=${city}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=${units}`)
+        await api.get(`/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=${units}`)
         .then((response)=>{
             if(response.status == 200)
             {
