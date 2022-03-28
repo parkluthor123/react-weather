@@ -82,6 +82,15 @@ export const SearchWrapper = styled.section`
                     padding: 0 15px;
                     color: ${props=>props.theme.colors.inputText};
                 }
+                .tooltip
+                {
+                    color: ${props=>props.theme.colors.primary};
+                    display: flex;
+                    justify-content: flex-end;
+                    font-size: 14px;
+                    padding-top: 10px;
+                    width: var(--full);
+                }
         }
 `;
 

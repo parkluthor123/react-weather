@@ -5,6 +5,7 @@ import { formatToURL } from '../utils/Helper'
 
 const SearchComponent: React.FC = ()=>{
     const { getCurrentWeather, getnextWeather, setCurrentCity } = useContext(DataContext);
+    const [showTooltip, setShowTooltip] = useState<boolean>(false)
     const getData = (e: any)=>{
         setCurrentCity(formatToURL(e.target.value))
     }
@@ -29,7 +30,10 @@ const SearchComponent: React.FC = ()=>{
                             id="city"
                             onChange={getData}
                             onKeyPress={captureHandleKey}
+                            onFocus={()=>setShowTooltip(true)}
+                            onBlur={()=>setShowTooltip(false)}
                         />
+                        {showTooltip ? <span className='tooltip'>[Press Enter Key to search]</span> : null}
                     </form>
                 </Container>
             </SearchWrapper>
