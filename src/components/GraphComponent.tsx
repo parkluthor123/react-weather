@@ -66,7 +66,7 @@ const GraphComponent: React.FC = ()=>{
         labels: hour,
         datasets: [
           {
-            label: 'My First dataset',
+            label: 'Daily temperature',
             fill: false,
             lineTension: 0.3,
             borderColor: dark.colors.primary,
