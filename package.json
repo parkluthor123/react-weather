@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/chart.js": "^2.9.35",
     "@types/moment": "^2.13.0",
     "@types/react-chartjs-2": "^2.5.7",
     "@types/styled-components": "^5.1.22",

@@ -30,6 +30,7 @@ import {
     ChartType
   } from 'chart.js';
 import { DataContext } from '../providers/DataProvider';
+import { ChartData } from 'chart.js';
 
 
 const GraphComponent: React.FC = ()=>{
@@ -61,8 +62,7 @@ const GraphComponent: React.FC = ()=>{
         Tooltip
       );
 
-      const data = {
-        type: 'line' as ChartType,
+      const data: ChartData<'line'> = {
         labels: hour,
         datasets: [
           {
