@@ -26,7 +26,8 @@ import {
     Filler,
     Legend,
     Title,
-    Tooltip
+    Tooltip,
+    ChartType
   } from 'chart.js';
 import { DataContext } from '../providers/DataProvider';
 
@@ -61,7 +62,7 @@ const GraphComponent: React.FC = ()=>{
       );
 
       const data = {
-        type: 'line',
+        type: 'line' as ChartType,
         labels: hour,
         datasets: [
           {
